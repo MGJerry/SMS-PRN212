@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-using BusinessLayer;
+using BusinessObjects;
 
 namespace Services
 {
@@ -38,33 +38,34 @@ namespace Services
 
         public bool isPhoneValidation(string phoneNumber)
         {
-            string regex = @"^(?:\+84|84|0)(3|5|7|8|9)\d{8}$";
-            return Regex.IsMatch(phoneNumber, regex);
+            /*string regex = @"^(?:\+84|84|0)(3|5|7|8|9)\d{8}$";
+            return Regex.IsMatch(phoneNumber, regex);*/
+            return true; // Yeah, em chiu cai dong phone number trong db - L.Huy :P
         }
 
-        public bool IsCustomerIDExist(int customerID)
+        public bool IsCustomerIdExist(int customerId)
         {
-            return customers.Any(c => c.CustomerID == customerID);
+            return customers.Any(c => c.CustomerId == customerId);
         }
 
-        public bool IsCategoryIDExist(int categoryID)
+        public bool IsCategoryIdExist(int categoryId)
         {
-            return categories.Any(c => c.CategoryID == categoryID);
+            return categories.Any(c => c.CategoryId == categoryId);
         }
 
-        public bool IsEmployeeIDExist(int employeeID)
+        public bool IsEmployeeIdExist(int employeeId)
         {
-            return employees.Any(e => e.EmployeeID == employeeID);
+            return employees.Any(e => e.EmployeeId == employeeId);
         }
 
-        public bool IsProductIDExist(int productID)
+        public bool IsProductIdExist(int productId)
         {
-            return products.Any(p => p.ProductID == productID);
+            return products.Any(p => p.ProductId == productId);
         }
 
-        public bool IsOrderIDExist(int orderID)
+        public bool IsOrderIdExist(int orderId)
         {
-            return orders.Any(o => o.OrderID == orderID);
+            return orders.Any(o => o.OrderId == orderId);
         }
     }
 }

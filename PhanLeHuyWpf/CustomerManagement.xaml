@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="CustomerManagement" Height="450" Width="800">
     <Grid>
-        <ListView x:Name="lvCustomer" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,0,0,260">
+        <ListView x:Name="lvCustomer" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="0,20,0,81">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Ma khach hang" DisplayMemberBinding="{Binding CustomerID}"/>
+                    <GridViewColumn Header="Ma khach hang" DisplayMemberBinding="{Binding CustomerId}"/>
                     <GridViewColumn Header="Ten cong ty" DisplayMemberBinding="{Binding CompanyName}"/>
                     <GridViewColumn Header="Ten lien lac" DisplayMemberBinding="{Binding ContactName}"/>
                     <GridViewColumn Header="Tieu de lien lac" DisplayMemberBinding="{Binding ContactTitle}"/>
@@ -19,12 +19,12 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <Button x:Name="btnAddCustomer" Content="Add Customer" HorizontalAlignment="Left" Margin="22,217,0,0" VerticalAlignment="Top" Width="101" Click="btnAddCustomer_Click"/>
-        <Button x:Name="btnRemoveCustomer" Content="Remove Customer" HorizontalAlignment="Left" Margin="264,217,0,0" VerticalAlignment="Top" Click="btnRemoveCustomer_Click"/>
-        <Button x:Name="btnUpdateCustomer" Content="Update Customer" HorizontalAlignment="Left" Margin="145,217,0,0" VerticalAlignment="Top" Width="101" Click="btnUpdateCustomer_Click"/>
-        <Label Content="Ma khach hang:" HorizontalAlignment="Left" Margin="406,215,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtCustomerID_Search" HorizontalAlignment="Left" Margin="507,219,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Search Customer" HorizontalAlignment="Left" Margin="406,180,0,0" VerticalAlignment="Top" Width="149" FontWeight="Bold"/>
-        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="643,217,0,0" VerticalAlignment="Top" Width="74" Click="btnSearch_Click"/>
+        <Button x:Name="btnAddCustomer" Content="Add Customer" HorizontalAlignment="Left" Margin="30,0,0,20" VerticalAlignment="Bottom" Width="101" Click="btnAddCustomer_Click"/>
+        <Button x:Name="btnRemoveCustomer" Content="Remove Customer" HorizontalAlignment="Left" Margin="272,0,0,20" VerticalAlignment="Bottom"  Click="btnRemoveCustomer_Click"/>
+        <Button x:Name="btnUpdateCustomer" Content="Update Customer" HorizontalAlignment="Left" Margin="153,0,0,20" VerticalAlignment="Bottom"  Width="101" Click="btnUpdateCustomer_Click"/>
+        <Label Content="Ma khach hang:" HorizontalAlignment="Left" Margin="414,0,0,20" VerticalAlignment="Bottom" />
+        <TextBox x:Name="txtCustomerId_Search" HorizontalAlignment="Left" Margin="515,0,0,20"  TextWrapping="Wrap" VerticalAlignment="Bottom" Width="120"/>
+        <Label Content="Search Customer" HorizontalAlignment="Left" Margin="414,0,0,50" VerticalAlignment="Bottom"  Width="149" FontWeight="Bold"/>
+        <Button x:Name="btnSearch" Content="Search" HorizontalAlignment="Left" Margin="651,0,0,20" VerticalAlignment="Bottom"  Width="74" Click="btnSearch_Click"/>
     </Grid>
 </Window>

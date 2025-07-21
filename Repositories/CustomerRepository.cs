@@ -3,42 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer;
+using BusinessObjects;
 using DataLayer;
 
 namespace Repositories
 {
     public class CustomerRepository : ICustomerRepository
     {
-        CustomerDAO customerDAO = new CustomerDAO();
         public bool AddCustomer(Customer customer)
         {
-            return customerDAO.AddCustomer(customer);
+            return CustomerDAO.AddCustomer(customer);
         }
 
         public List<Customer> GenerateSampleDataset()
         {
-            return customerDAO.GenerateSampleDataset();
+            return CustomerDAO.GetCustomers();
         }
 
         public List<Customer> GetCustomers()
         {
-            return customerDAO.GetCustomers();
+            return CustomerDAO.GetCustomers();
         }
 
         public bool RemoveCustomer(int customerId)
         {
-            return customerDAO.RemoveCustomer(customerId);
+            return CustomerDAO.RemoveCustomer(customerId);
         }
 
         public Customer SearchCustomer(int customerId)
         {
-            return customerDAO.SearchCustomer(customerId);
+            return CustomerDAO.SearchCustomer(customerId);
         }
 
         public bool UpdateCustomer(Customer customer)
         {
-            return customerDAO.UpdateCustomer(customer);
+            return CustomerDAO.UpdateCustomer(customer);
         }
     }
 }

@@ -3,43 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer;
+using BusinessObjects;
 using DataLayer;
 
 namespace Repositories
 {
     public class EmployeeRepository : IEmployeeRepository
     {
-        EmployeeDAO employeeDAO = new EmployeeDAO();
-
         public bool AddEmployee(Employee employee)
         {
-            return employeeDAO.AddEmployee(employee);
+            return EmployeeDAO.AddEmployee(employee);
         }
 
         public List<Employee> GenerateSampleDataset()
         {
-            return employeeDAO.GenerateSampleDataset();
+            return EmployeeDAO.GetEmployees();
         }
 
         public List<Employee> GetEmployees()
         {
-            return employeeDAO.GetEmployees();
+            return EmployeeDAO.GetEmployees();
         }
 
         public bool RemoveEmployee(int employeeId)
         {
-            return employeeDAO.RemoveEmployee(employeeId);
+            return EmployeeDAO.RemoveEmployee(employeeId);
         }
 
         public Employee SearchEmployee(int employeeId)
         {
-            return employeeDAO.SearchEmployee(employeeId);
+            return EmployeeDAO.SearchEmployee(employeeId);
         }
 
         public bool UpdateEmployee(Employee employee)
         {
-            return employeeDAO.UpdateEmployee(employee);
+            return EmployeeDAO.UpdateEmployee(employee);
         }
     }
 }

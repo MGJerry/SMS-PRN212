@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -66,7 +66,7 @@ namespace PhanLeHuyWpf
                     return;
                 }
 
-                bool isSuccess = ps.RemoveProduct(selectedProduct.ProductID);
+                bool isSuccess = ps.RemoveProduct(selectedProduct.ProductId);
 
                 if (isSuccess)
                 {
@@ -81,9 +81,9 @@ namespace PhanLeHuyWpf
 
         private void btnSearchProduct_Click(object sender, RoutedEventArgs e)
         {
-            if (!int.TryParse(txtSearchProductID.Text, out int id))
+            if (!int.TryParse(txtSearchProductId.Text, out int id))
             {
-                MessageBox.Show("ID không hợp lệ.");
+                MessageBox.Show("Id không hợp lệ.");
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace PhanLeHuyWpf
             }
             else
             {
-                MessageBox.Show($"Không tìm thấy sản phẩm với ID = {id}");
+                MessageBox.Show($"Không tìm thấy sản phẩm với Id = {id}");
             }
         }
     }

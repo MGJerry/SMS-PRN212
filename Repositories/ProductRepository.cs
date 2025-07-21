@@ -3,43 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer;
+using BusinessObjects;
 using DataLayer;
 
 namespace Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        ProductDAO productDAO = new ProductDAO();
-
         public bool AddProduct(Product product)
         {
-            return productDAO.AddProduct(product);
+            return ProductDAO.AddProduct(product);
         }
 
         public List<Product> GenerateSampleDataset()
         {
-            return productDAO.GenerateSampleDataset();
+            return ProductDAO.GetProducts();
         }
 
         public List<Product> GetProducts()
         {
-            return productDAO.GetProducts();
+            return ProductDAO.GetProducts();
         }
 
         public bool RemoveProduct(int productId)
         {
-            return productDAO.RemoveProduct(productId);
+            return ProductDAO.RemoveProduct(productId);
         }
 
         public Product SearchProduct(int productId)
         {
-            return productDAO.SearchProduct(productId);
+            return ProductDAO.SearchProduct(productId);
         }
 
         public bool UpdateProduct(Product product)
         {
-            return productDAO.UpdateProduct(product);
+            return ProductDAO.UpdateProduct(product);
         }
     }
 }

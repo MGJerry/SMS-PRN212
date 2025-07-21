@@ -7,13 +7,14 @@
         mc:Ignorable="d"
         Title="CustomerLogin" Height="450" Width="800">
     <Grid>
-        <Label Content="PRN212 Assignment 01" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="41" Width="214" FontSize="20"/>
-        <Label Content="Building a Sales Order Management System using WPF and LINQ" HorizontalAlignment="Left" Margin="119,68,0,0" VerticalAlignment="Top" Height="41" Width="588" FontSize="20"/>
+        <Label Content="PRN212 Assignment 02" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="41" Width="214" FontSize="20"/>
+        <Label Content="Building a Sales Order Management System using WPF, LINQ and EF" HorizontalAlignment="Center" Margin="0,68,0,0" VerticalAlignment="Top" Height="41" Width="660" FontSize="20" HorizontalContentAlignment="Center"/>
         <Label Content="Sales Management System (SMS)" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="41" Width="308" FontSize="20"/>
         <Label Content="Phone:" HorizontalAlignment="Left" Margin="275,0,0,0" VerticalAlignment="Center" FontSize="18" Height="32" Width="134"/>
         <TextBox x:Name="txtPhone" HorizontalAlignment="Left" Margin="353,208,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170" FontSize="18" Height="25"/>
         <Button x:Name="btnCustomerLogin" Content="Login" HorizontalAlignment="Left" Margin="316,263,0,0" VerticalAlignment="Top" Height="25" Width="74" Click="btnCustomerLogin_Click"/>
         <Button x:Name="btnExit" Content="Logout" HorizontalAlignment="Left" Margin="413,263,0,0" VerticalAlignment="Top" Height="25" Width="74" Click="btnExit_Click"/>
+        <CheckBox x:Name="chkSaveInfor" Content="Remember Me" FontSize="12" HorizontalAlignment="Left" Margin="280,240,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </Window>

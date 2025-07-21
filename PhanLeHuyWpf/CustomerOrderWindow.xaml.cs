@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -32,24 +32,25 @@ namespace PhanLeHuyWpf
             orderService.GenerateSampleDataset();
             orderDetailService.GenerateSampleDataset();
             DisplayOrders(currentCustomer);
+            CustomerMenu.currentCustomer = currentCustomer;
         }
 
         private void DisplayOrders(Customer currentCustomer)
         {
             lvCustomerOrders.ItemsSource = null;
-            orders = orderService.GetOrders().Where(o => o.CustomerID == currentCustomer.CustomerID).ToList();
+            orders = orderService.GetOrders().Where(o => o.CustomerId == currentCustomer.CustomerId).ToList();
             orderDetails = orderDetailService.GetOrderDetails();
 
             var displayList = (from order in orders
                                join detail in orderDetails
-                               on order.OrderID equals detail.OrderID
+                               on order.OrderId equals detail.OrderId
                                select new
                                {
-                                   OrderID = order.OrderID,
-                                   CustomerID = order.CustomerID,
-                                   EmployeeID = order.EmployeeID,
+                                   OrderId = order.OrderId,
+                                   CustomerId = order.CustomerId,
+                                   EmployeeId = order.EmployeeId,
                                    OrderDate = order.OrderDate,
-                                   ProductID = detail.ProductID,
+                                   ProductId = detail.ProductId,
                                    UnitPrice = detail.UnitPrice,
                                    Quantity = detail.Quantity,
                                    Discount = detail.Discount

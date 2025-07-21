@@ -7,8 +7,8 @@
 
         <StackPanel Orientation="Vertical" Margin="0,30,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="ProductID:" Width="140"/>
-                <TextBox x:Name="txtProductID" Width="300"/>
+                <Label Content="ProductId:" Width="140"/>
+                <TextBox x:Name="txtProductId" Width="300"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
@@ -17,13 +17,13 @@
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="SupplierID:" Width="140"/>
-                <TextBox x:Name="txtSupplierID" Width="300"/>
+                <Label Content="SupplierId:" Width="140"/>
+                <TextBox x:Name="txtSupplierId" Width="300"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="CategoryID:" Width="140"/>
-                <TextBox x:Name="txtCategoryID" Width="300"/>
+                <Label Content="CategoryId:" Width="140"/>
+                <TextBox x:Name="txtCategoryId" Width="300"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">

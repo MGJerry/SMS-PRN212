@@ -25,7 +25,7 @@
         <ListView x:Name="lvReport" Grid.Row="1" Margin="0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Order ID" DisplayMemberBinding="{Binding OrderID}" Width="100"/>
+                    <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding OrderId}" Width="100"/>
                     <GridViewColumn Header="Customer" DisplayMemberBinding="{Binding CustomerName}" Width="200"/>
                     <GridViewColumn Header="Date" DisplayMemberBinding="{Binding OrderDate}" Width="120"/>
                     <GridViewColumn Header="Total Amount" DisplayMemberBinding="{Binding TotalAmount}" Width="120"/>

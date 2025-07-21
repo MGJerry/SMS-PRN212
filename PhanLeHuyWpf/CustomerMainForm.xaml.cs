@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 
 namespace PhanLeHuyWpf
 {
@@ -25,6 +25,7 @@ namespace PhanLeHuyWpf
         {
             InitializeComponent();
             currentCustomer = existingCustomer;
+            CustomerMenu.currentCustomer = currentCustomer;
         }
 
         private void btnOrderProcessing_Click(object sender, RoutedEventArgs e)

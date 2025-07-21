@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Services;
-using BusinessLayer;
+using BusinessObjects;
 
 namespace PhanLeHuyWpf
 {
@@ -73,7 +73,7 @@ namespace PhanLeHuyWpf
                 return;
             }
 
-            bool isSuccess = os.RemoveOrder(order.OrderID);
+            bool isSuccess = os.RemoveOrder(order.OrderId);
 
             if (isSuccess)
             {
@@ -87,7 +87,7 @@ namespace PhanLeHuyWpf
 
         private void btnSearchOrder_Click(object sender, RoutedEventArgs e)
         {
-            int id = int.Parse(txtSearchOrderID.Text);
+            int id = int.Parse(txtSearchOrderId.Text);
 
             Order order = os.SearchOrder(id);
 

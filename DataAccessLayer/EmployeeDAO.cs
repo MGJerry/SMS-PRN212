@@ -1,13 +1,15 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLayer;
 
 namespace DataLayer
 {
     public class EmployeeDAO
     {
-        static List<Employee> employees = new List<Employee>();
+        /*static List<Employee> employees = new List<Employee>();
         private bool isGenerated = false;
         public List<Employee> GenerateSampleDataset()
         {
@@ -18,7 +20,7 @@ namespace DataLayer
 
             employees.Add(new Employee()
             {
-                EmployeeID = 1,
+                EmployeeId = 1,
                 Name = "Alice Nguyen",
                 UserName = "alice.ng",
                 Password = "Tech@123",
@@ -30,7 +32,7 @@ namespace DataLayer
 
             employees.Add(new Employee()
             {
-                EmployeeID = 2,
+                EmployeeId = 2,
                 Name = "Bob Tran",
                 UserName = "bob.tr",
                 Password = "Finance#456",
@@ -42,7 +44,7 @@ namespace DataLayer
 
             employees.Add(new Employee()
             {
-                EmployeeID = 3,
+                EmployeeId = 3,
                 Name = "Charlie Le",
                 UserName = "charlie.le",
                 Password = "Dev$pass1",
@@ -54,7 +56,7 @@ namespace DataLayer
 
             employees.Add(new Employee()
             {
-                EmployeeID = 4,
+                EmployeeId = 4,
                 Name = "Diana Pham",
                 UserName = "diana.ph",
                 Password = "HRadmin!78",
@@ -66,7 +68,7 @@ namespace DataLayer
 
             employees.Add(new Employee()
             {
-                EmployeeID = 5,
+                EmployeeId = 5,
                 Name = "Ethan Doan",
                 UserName = "ethan.do",
                 Password = "Notes@987",
@@ -78,64 +80,103 @@ namespace DataLayer
 
             isGenerated = true;
             return employees;
-        }
+        }*/
 
         /*public List<Employee> GetDataFromDatabase ()
         {
             return DatabaseContext.GetDbContext().Employees.ToList();
         }*/
 
-        public List<Employee> GetEmployees()
+        public static List<Employee> GetEmployees()
         {
-            return employees;
+            try
+            {
+                using var context = new LucySalesDataContext();
+                return context.Employees.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool AddEmployee(Employee employee)
+        public static bool AddEmployee(Employee employee)
         {
-            Employee e = employees.FirstOrDefault(emp => emp.EmployeeID == employee.EmployeeID);
-            if (e != null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                context.Employees.Add(employee);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static bool RemoveEmployee(int employeeId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var employee = context.Employees.Find(employeeId);
+
+                if (employee != null)
+                {
+                    context.Employees.Remove(employee);
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            employees.Add(employee);
-            return true;
-        }
-        public bool RemoveEmployee(int employeeId)
-        {
-            Employee e = employees.FirstOrDefault(emp => emp.EmployeeID == employeeId);
-            if (e == null)
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception(ex.Message);
             }
-
-            employees.Remove(e);
-            return true;
         }
 
-        public Employee SearchEmployee(int employeeId)
+        public static Employee SearchEmployee(int employeeId)
         {
-            return employees.FirstOrDefault(emp => emp.EmployeeID == employeeId);
+            try
+            {
+                using var context = new LucySalesDataContext();
+                return context.Employees
+                    .Include(e => e.Orders)
+                    .FirstOrDefault(e => e.EmployeeId == employeeId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
         // Cap nhat thong tin nhan vien
-        public bool UpdateEmployee(Employee employee)
+        public static bool UpdateEmployee(Employee employee)
         {
-            Employee e = employees.FirstOrDefault(emp => emp.EmployeeID == employee.EmployeeID);
-            if (e == null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                var existingEmployee = context.Employees.Find(employee.EmployeeId);
+
+                if (existingEmployee != null)
+                {
+                    existingEmployee.Name = employee.Name;
+                    existingEmployee.UserName = employee.UserName;
+                    existingEmployee.Password = employee.Password;
+                    existingEmployee.JobTitle = employee.JobTitle;
+                    existingEmployee.BirthDate = employee.BirthDate;
+                    existingEmployee.HireDate = employee.HireDate;
+                    existingEmployee.Address = employee.Address;
+
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            e.Name = employee.Name;
-            e.UserName = employee.UserName;
-            e.Password = employee.Password;
-            e.JobTitle = employee.JobTitle;
-            e.BirthDate = employee.BirthDate;
-            e.HireDate = employee.HireDate;
-            e.Address = employee.Address;
-
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

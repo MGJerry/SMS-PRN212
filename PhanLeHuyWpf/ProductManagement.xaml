@@ -18,10 +18,10 @@
         <ListView x:Name="lvProduct" Margin="0,0,0,146" Grid.ColumnSpan="2">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ProductID" DisplayMemberBinding="{Binding ProductID}" />
+                    <GridViewColumn Header="ProductId" DisplayMemberBinding="{Binding ProductId}" />
                     <GridViewColumn Header="ProductName" DisplayMemberBinding="{Binding ProductName}" />
-                    <GridViewColumn Header="SupplierID" DisplayMemberBinding="{Binding SupplierID}" />
-                    <GridViewColumn Header="CategoryID" DisplayMemberBinding="{Binding CategoryID}" />
+                    <GridViewColumn Header="SupplierId" DisplayMemberBinding="{Binding SupplierId}" />
+                    <GridViewColumn Header="CategoryId" DisplayMemberBinding="{Binding CategoryId}" />
                     <GridViewColumn Header="Quantity/Unit" DisplayMemberBinding="{Binding QuantityPerUnit}" />
                     <GridViewColumn Header="Unit Price" DisplayMemberBinding="{Binding UnitPrice}" />
                     <GridViewColumn Header="In Stock" DisplayMemberBinding="{Binding UnitsInStock}" />
@@ -38,8 +38,8 @@
         <Button x:Name="btnUpdateProduct" Content="Update Product" Margin="538,241,0,0" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnUpdateProduct_Click"/>
         <Button x:Name="btnRemoveProduct" Content="Remove Product" Margin="680,240,0,0" Width="110" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnRemoveProduct_Click"/>
 
-        <Label Content="ProductID:" Margin="32,237,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtSearchProductID" Margin="112,241,0,0" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <Label Content="ProductId:" Margin="32,237,0,0" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSearchProductId" Margin="112,241,0,0" Width="120" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <Button x:Name="btnSearchProduct" Content="Search" Margin="242,239,0,0" Width="70" HorizontalAlignment="Left" VerticalAlignment="Top" Click="btnSearchProduct_Click"/>
         <Label Content="Search Product" HorizontalAlignment="Left" Margin="32,211,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
     </Grid>

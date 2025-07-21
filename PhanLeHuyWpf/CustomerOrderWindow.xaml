@@ -1,23 +1,30 @@
 ﻿<Window x:Class="PhanLeHuyWpf.CustomerOrderWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PhanLeHuyWpf"
         Title="Customer Orders" Height="450" Width="900" WindowStartupLocation="CenterScreen">
-    <Grid Margin="10">
-        <Label Content="Your Orders" FontSize="18" FontWeight="Bold" Margin="0,0,0,10"/>
-
-        <ListView x:Name="lvCustomerOrders" Margin="0,40,0,0">
+    <Grid>
+        <Grid Margin="20">
+            <Label Content="Your Orders" FontSize="18" FontWeight="Bold" Margin="0,0,0,11"/>
+            <ListView x:Name="lvCustomerOrders" Margin="0,40,0,0">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Order ID" DisplayMemberBinding="{Binding OrderID}" Width="80"/>
-                    <GridViewColumn Header="Customer ID" DisplayMemberBinding="{Binding CustomerID}" Width="90"/>
-                    <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding EmployeeID}" Width="90"/>
+                    <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding OrderId}" Width="80"/>
+                    <GridViewColumn Header="Customer Id" DisplayMemberBinding="{Binding CustomerId}" Width="90"/>
+                    <GridViewColumn Header="Employee Id" DisplayMemberBinding="{Binding EmployeeId}" Width="90"/>
                     <GridViewColumn Header="Order Date" DisplayMemberBinding="{Binding OrderDate}" Width="110"/>
-                    <GridViewColumn Header="Product ID" DisplayMemberBinding="{Binding ProductID}" Width="80"/>
+                    <GridViewColumn Header="Product Id" DisplayMemberBinding="{Binding ProductId}" Width="80"/>
                     <GridViewColumn Header="Unit Price" DisplayMemberBinding="{Binding UnitPrice}" Width="90"/>
                     <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="80"/>
                     <GridViewColumn Header="Discount" DisplayMemberBinding="{Binding Discount}" Width="80"/>
                 </GridView>
             </ListView.View>
         </ListView>
+        </Grid>
+
+        <!-- Nav stuff -->
+        <local:CustomerMenuControl x:Name="CustomerMenu" Grid.Column="0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

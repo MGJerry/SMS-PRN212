@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -16,14 +16,14 @@ namespace PhanLeHuyWpf
         {
             InitializeComponent();
 
-            txtCustomerID.Text = existingCustomer.CustomerID.ToString();
+            txtCustomerId.Text = existingCustomer.CustomerId.ToString();
             txtCompany.Text = existingCustomer.CompanyName;
             txtContactName.Text = existingCustomer.ContactName;
             txtContactTitle.Text = existingCustomer.ContactTitle;
             txtAddress.Text = existingCustomer.Address;
             txtPhone.Text = existingCustomer.Phone;
 
-            txtCustomerID.IsReadOnly = true;
+            txtCustomerId.IsReadOnly = true;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -42,7 +42,7 @@ namespace PhanLeHuyWpf
             {
                 Customer customer = new Customer
                 {
-                    CustomerID = int.Parse(txtCustomerID.Text),
+                    CustomerId = int.Parse(txtCustomerId.Text),
                     CompanyName = txtCompany.Text,
                     ContactName = txtContactName.Text,
                     ContactTitle = txtContactTitle.Text,

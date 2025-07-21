@@ -6,13 +6,30 @@
         xmlns:local="clr-namespace:PhanLeHuyWpf"
         mc:Ignorable="d"
         Title="Welcome" Height="450" Width="800">
-    <Grid>
-        <Label Content="PRN212 Assignment 01" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="41" Width="214" FontSize="20"/>
-        <Label Content="Building a Sales Order Management System using WPF and LINQ" HorizontalAlignment="Left" Margin="119,68,0,0" VerticalAlignment="Top" Height="41" Width="588" FontSize="20"/>
+    <Grid HorizontalAlignment="Center" Width="auto">
+        <Label Content="PRN212 Assignment 02" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="41" Width="214" FontSize="20"/>
+        <Label Content="Building a Sales Order Management System using WPF, LINQ and EF" HorizontalAlignment="Center" Margin="0,68,0,0" VerticalAlignment="Top" Height="41" Width="660" FontSize="20" HorizontalContentAlignment="Center"/>
         <Label Content="Sales Management System (SMS)" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="41" Width="308" FontSize="20"/>
-        <Button x:Name="btnEmployeeLogin" Content="Employee Login" HorizontalAlignment="Center" VerticalAlignment="Top" Height="43" Width="286" Margin="0,172,0,0" Click="btnEmployeeLogin_Click"/>
-        <Button x:Name="btnCustomerLogin" Content="Customer Login" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Height="42" Width="286" Click="btnCustomerLogin_Click"/>
-        <Button x:Name="btnExit" Content="Exit" HorizontalAlignment="Center" Margin="0,300,0,0" VerticalAlignment="Top" Height="42" Width="286" Click="btnExit_Click"/>
+        <Button x:Name="btnEmployeeLogin" HorizontalAlignment="Left" VerticalAlignment="Top" Height="43" Width="286" Margin="32,200,0,0" Click="btnEmployeeLogin_Click">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="/Assets/Employee.png" Width="32" />
+                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Employyee Login</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnCustomerLogin" HorizontalAlignment="Left" Margin="32,253,0,0" VerticalAlignment="Top" Height="42" Width="286" Click="btnCustomerLogin_Click">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="/Assets/Customer.png" Width="32" />
+                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Customer Login</TextBlock>
+            </StackPanel>
+        </Button>
+        <Button x:Name="btnExit" HorizontalAlignment="Left" Margin="32,328,0,0" VerticalAlignment="Top" Height="42" Width="286" Click="btnExit_Click">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <Image Source="/Assets/ExitToApp.png" Width="32" />
+                <TextBlock VerticalAlignment="Center" Margin="10,0,0,0">Exit</TextBlock>
+            </StackPanel>
+        </Button>
+        <Image Source="/Assets/GiantShoppingCart.png"  HorizontalAlignment="Left" Height="250" Margin="375,155,0,0" VerticalAlignment="Top" Width="250"/>
+
 
     </Grid>
 </Window>

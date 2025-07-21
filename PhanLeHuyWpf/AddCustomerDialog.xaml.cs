@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -32,7 +32,7 @@ namespace PhanLeHuyWpf
         {
             return new Customer
             {
-                CustomerID = int.Parse(txtCustomerID.Text),
+                CustomerId = int.Parse(txtCustomerId.Text),
                 CompanyName = txtCompany.Text,
                 Address = txtAddress.Text,
                 Phone = txtPhone.Text,
@@ -43,7 +43,7 @@ namespace PhanLeHuyWpf
 
         private void btnAddCustomer_Click(object sender, RoutedEventArgs e)
         {
-            if (txtCustomerID == null || txtContactTitle == null
+            if (txtCustomerId == null || txtContactTitle == null
                 || txtContactName == null || txtCompany == null ||
                 txtAddress == null || txtPhone == null)
             {

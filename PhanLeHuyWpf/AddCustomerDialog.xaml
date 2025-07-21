@@ -8,7 +8,7 @@
         <StackPanel Orientation="Vertical" Margin="0,30,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <Label Content="Ma khach hang:" Width="120"/>
-                <TextBox x:Name="txtCustomerID" Width="200"/>
+                <TextBox x:Name="txtCustomerId" Width="200"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">

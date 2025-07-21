@@ -4,13 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer
+namespace BusinessObjects
 {
     public class Order
     {
-        public int OrderID { get; set; }
-        public int CustomerID { get; set; }
-        public int EmployeeID { get; set; }
+        public int OrderId { get; set; }
+        public int CustomerId { get; set; }
+        public int EmployeeId { get; set; }
         public DateTime OrderDate { get; set; }
+
+        public virtual Customer Customer { get; set; } = null!;
+        public virtual Employee Employee { get; set; } = null!;
+        public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     }
 }

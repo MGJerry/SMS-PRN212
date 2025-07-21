@@ -3,43 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer;
+using BusinessObjects;
 using DataLayer;
 
 namespace Repositories
 {
     public class OrderDetailRepository : IOrderDetailRepository
     {
-        OrderDetailDAO orderDetailDAO = new OrderDetailDAO();
-
         public bool AddOrderDetail(OrderDetail detail)
         {
-            return orderDetailDAO.AddOrderDetail(detail);
+            return OrderDetailDAO.AddOrderDetail(detail);
         }
 
         public List<OrderDetail> GenerateSampleDataset()
         {
-            return orderDetailDAO.GenerateSampleDataset();
+            return OrderDetailDAO.GetOrderDetails();
         }
 
         public List<OrderDetail> GetOrderDetails()
         {
-            return orderDetailDAO.GetOrderDetails();
+            return OrderDetailDAO.GetOrderDetails();
         }
 
         public bool RemoveOrderDetail(int orderId, int productId)
         {
-            return orderDetailDAO.RemoveOrderDetail(orderId, productId);
+            return OrderDetailDAO.RemoveOrderDetail(orderId, productId);
         }
 
         public OrderDetail SearchOrderDetail(int orderId, int productId)
         {
-            return orderDetailDAO.SearchOrderDetail(orderId, productId);
+            return OrderDetailDAO.SearchOrderDetail(orderId, productId);
         }
 
         public bool UpdateOrderDetail(OrderDetail detail)
         {
-            return orderDetailDAO.UpdateOrderDetail(detail);
+            return OrderDetailDAO.UpdateOrderDetail(detail);
         }
     }
 }

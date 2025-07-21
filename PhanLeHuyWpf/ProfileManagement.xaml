@@ -7,8 +7,8 @@
 
         <StackPanel Orientation="Vertical" Margin="0,30,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,5">
-                <Label Content="Customer ID:" Width="140"/>
-                <TextBox x:Name="txtCustomerID" Width="300" IsReadOnly="True"/>
+                <Label Content="Customer Id:" Width="140"/>
+                <TextBox x:Name="txtCustomerId" Width="300" IsReadOnly="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">

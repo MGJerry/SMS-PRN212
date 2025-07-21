@@ -12,18 +12,18 @@
         </Grid.RowDefinitions>
 
         <StackPanel Orientation="Horizontal" Margin="0,5">
-            <Label Content="Order ID:" Width="100"/>
-            <TextBox x:Name="txtOrderID" Width="200" IsReadOnly="True"/>
+            <Label Content="Order Id:" Width="100"/>
+            <TextBox x:Name="txtOrderId" Width="200" IsReadOnly="True"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="1" Margin="0,5">
-            <Label Content="Customer ID:" Width="100"/>
-            <TextBox x:Name="txtCustomerID" Width="200"/>
+            <Label Content="Customer Id:" Width="100"/>
+            <TextBox x:Name="txtCustomerId" Width="200"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="2" Margin="0,5">
-            <Label Content="Employee ID:" Width="100"/>
-            <TextBox x:Name="txtEmployeeID" Width="200"/>
+            <Label Content="Employee Id:" Width="100"/>
+            <TextBox x:Name="txtEmployeeId" Width="200"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Grid.Row="3" Margin="0,5">

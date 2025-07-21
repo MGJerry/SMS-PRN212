@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -32,12 +32,12 @@ namespace PhanLeHuyWpf
         {
             return new Product
             {
-                ProductID = int.Parse(txtProductID.Text),
+                ProductId = int.Parse(txtProductId.Text),
                 ProductName = txtProductName.Text,
-                SupplierID = int.Parse(txtSupplierID.Text),
-                CategoryID = int.Parse(txtCategoryID.Text),
-                QuantityPerUnit = int.Parse(txtQuantityPerUnit.Text),
-                UnitPrice = double.Parse(txtUnitPrice.Text),
+                SupplierId = int.Parse(txtSupplierId.Text),
+                CategoryId = int.Parse(txtCategoryId.Text),
+                QuantityPerUnit = txtQuantityPerUnit.Text.Trim(),
+                UnitPrice = decimal.Parse(txtUnitPrice.Text),
                 UnitsInStock = int.Parse(txtUnitsInStock.Text),
                 UnitsOnOrder = int.Parse(txtUnitsOnOrder.Text),
                 ReorderLevel = int.Parse(txtReorderLevel.Text),
@@ -47,11 +47,11 @@ namespace PhanLeHuyWpf
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            int pid = int.Parse(txtProductID.Text);
-            int sid = int.Parse(txtSupplierID.Text);
-            int cid = int.Parse(txtCategoryID.Text);
+            int pid = int.Parse(txtProductId.Text);
+            int sid = int.Parse(txtSupplierId.Text);
+            int cid = int.Parse(txtCategoryId.Text);
 
-            if (iv.IsProductIDExist(pid) || !iv.IsCategoryIDExist(cid))
+            if (iv.IsProductIdExist(pid) || !iv.IsCategoryIdExist(cid))
             {
                 MessageBox.Show("Thong tin khong hop le hoac san pham da ton tai");
                 return;

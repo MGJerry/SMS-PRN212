@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -39,7 +39,7 @@ namespace PhanLeHuyWpf
 
         private void btnSearch_Click(object sender, RoutedEventArgs e)
         {
-            int id = int.Parse(txtCustomerID_Search.Text);
+            int id = int.Parse(txtCustomerId_Search.Text);
 
             Customer customer = cs.SearchCustomer(id);
 
@@ -75,7 +75,7 @@ namespace PhanLeHuyWpf
                 return;
             }
 
-            bool isSuccess = cs.RemoveCustomer(customer.CustomerID);
+            bool isSuccess = cs.RemoveCustomer(customer.CustomerId);
 
             if (isSuccess)
             {

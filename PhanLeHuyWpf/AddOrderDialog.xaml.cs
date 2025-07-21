@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -31,20 +31,20 @@ namespace PhanLeHuyWpf
 
         private Order CreateOrderFromForm()
         {
-            int cid = int.Parse(txtCustomerID.Text);
-            int eid = int.Parse(txtEmployeeID.Text);
-            int oid = int.Parse(txtOrderID.Text);
+            int cid = int.Parse(txtCustomerId.Text);
+            int eid = int.Parse(txtEmployeeId.Text);
+            int oid = int.Parse(txtOrderId.Text);
 
-            if (iv.IsCustomerIDExist(cid) || !iv.IsEmployeeIDExist(eid) || !iv.IsOrderIDExist(oid))
+            if (iv.IsCustomerIdExist(cid) || !iv.IsEmployeeIdExist(eid) || !iv.IsOrderIdExist(oid))
             {
                 return null;
             }
 
             return new Order
             {
-                OrderID = int.Parse(txtOrderID.Text),
-                CustomerID = int.Parse(txtCustomerID.Text),
-                EmployeeID = int.Parse(txtEmployeeID.Text),
+                OrderId = int.Parse(txtOrderId.Text),
+                CustomerId = int.Parse(txtCustomerId.Text),
+                EmployeeId = int.Parse(txtEmployeeId.Text),
                 OrderDate = dpOrderDate.SelectedDate ?? DateTime.Now
             };
         }

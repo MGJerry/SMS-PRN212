@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -26,21 +26,21 @@ namespace PhanLeHuyWpf
         public ProfileManagement(Customer currentCustomer)
         {
             InitializeComponent();
-            txtCustomerID.Text = currentCustomer.CustomerID.ToString();
+            txtCustomerId.Text = currentCustomer.CustomerId.ToString();
             txtCompanyName.Text = currentCustomer.CompanyName.ToString();
             txtAddress.Text = currentCustomer.Address.ToString();
             txtContactTitle.Text = currentCustomer.ContactTitle.ToString();
             txtPhone.Text = currentCustomer.Phone.ToString();
             txtContactName.Text = currentCustomer.ContactName.ToString();
 
-            txtCustomerID.IsReadOnly = true;
+            txtCustomerId.IsReadOnly = true;
         }
 
         private Customer CreateCustomerFromForm()
         {
             return new Customer
             {
-                CustomerID = int.Parse(txtCustomerID.Text),
+                CustomerId = int.Parse(txtCustomerId.Text),
                 CompanyName = txtCompanyName.Text,
                 Address = txtAddress.Text,
                 Phone = txtPhone.Text,

@@ -1,5 +1,8 @@
-﻿using System;
+﻿using BusinessObjects;
+using Services;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +14,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
-using Services;
 
 namespace PhanLeHuyWpf
 {
@@ -29,6 +30,7 @@ namespace PhanLeHuyWpf
             InitializeComponent();
             cs.GenerateSampleDataset();
             customers = cs.GetCustomers();
+            RestoreLoginInformation();
         }
 
         private void btnCustomerLogin_Click(object sender, RoutedEventArgs e)
@@ -44,6 +46,7 @@ namespace PhanLeHuyWpf
                 CustomerMainForm cmf = new CustomerMainForm(c);
                 cmf.Show();
                 Close();
+                SaveLoginInformation(c, chkSaveInfor.IsChecked.Value);
             }else
             {
                 MessageBox.Show("So dien thoai dang nhap sai hoac khong ton tai");
@@ -62,6 +65,32 @@ namespace PhanLeHuyWpf
             Welcome w = new Welcome();
             w.Show();
             Close();
+        }
+
+        private void RestoreLoginInformation()
+        {
+            string log_file = "cuslogin_log.txt";
+            if (File.Exists(log_file))
+            {//nếu có tồn tại file này:
+                StreamReader sr = new StreamReader(log_file);
+                string line = sr.ReadLine();
+                sr.Close();
+                //tách line thành 3 thông tin: email; password; save
+                string[] arrData = line.Split(';');
+                if (arrData.Length == 2 && arrData[1] == "True")
+                {
+                    txtPhone.Text = arrData[0];
+                    chkSaveInfor.IsChecked = true;
+                }
+            }
+        }
+
+        void SaveLoginInformation(Customer cus, bool saved)
+        {
+            string infor = cus.Phone + ";" + saved;
+            StreamWriter sw = new StreamWriter("cuslogin_log.txt", false, Encoding.UTF8);
+            sw.WriteLine(infor);
+            sw.Close();
         }
     }
 }

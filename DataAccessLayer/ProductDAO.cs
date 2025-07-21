@@ -1,15 +1,17 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer;
 
 namespace DataLayer
 {
     public class ProductDAO
     {
-        static List<Product> products = new List<Product>();
+        /*static List<Product> products = new List<Product>();
         private bool isGenerated = false;
         public List<Product> GenerateSampleDataset()
         {
@@ -20,10 +22,10 @@ namespace DataLayer
 
             products.Add(new Product()
             {
-                ProductID = 1,
+                ProductId = 1,
                 ProductName = "Wireless Mouse",
-                SupplierID = 1,
-                CategoryID = 1,
+                SupplierId = 1,
+                CategoryId = 1,
                 QuantityPerUnit = 10,
                 UnitPrice = 25,
                 UnitsInStock = 100,
@@ -34,10 +36,10 @@ namespace DataLayer
 
             products.Add(new Product()
             {
-                ProductID = 2,
+                ProductId = 2,
                 ProductName = "Mechanical Keyboard",
-                SupplierID = 2,
-                CategoryID = 1,
+                SupplierId = 2,
+                CategoryId = 1,
                 QuantityPerUnit = 12,
                 UnitPrice = 55,
                 UnitsInStock = 50,
@@ -48,10 +50,10 @@ namespace DataLayer
 
             products.Add(new Product()
             {
-                ProductID = 3,
+                ProductId = 3,
                 ProductName = "27\" LED Monitor",
-                SupplierID = 3,
-                CategoryID = 2,
+                SupplierId = 3,
+                CategoryId = 2,
                 QuantityPerUnit = 6,
                 UnitPrice = 180,
                 UnitsInStock = 30,
@@ -62,10 +64,10 @@ namespace DataLayer
 
             products.Add(new Product()
             {
-                ProductID = 4,
+                ProductId = 4,
                 ProductName = "External SSD 1TB",
-                SupplierID = 4,
-                CategoryID = 3,
+                SupplierId = 4,
+                CategoryId = 3,
                 QuantityPerUnit = 20,
                 UnitPrice = 99,
                 UnitsInStock = 75,
@@ -76,10 +78,10 @@ namespace DataLayer
 
             products.Add(new Product()
             {
-                ProductID = 5,
+                ProductId = 5,
                 ProductName = "Gaming Laptop",
-                SupplierID = 5,
-                CategoryID = 4,
+                SupplierId = 5,
+                CategoryId = 4,
                 QuantityPerUnit = 4,
                 UnitPrice = 1200,
                 UnitsInStock = 10,
@@ -90,59 +92,106 @@ namespace DataLayer
 
             isGenerated = true;
             return products;
-        }
+        }*/
+
         /*public List<Product> GetDataFromDatabase ()
         {
             return DatabaseContext.GetDbContext().Products.ToList();
         }*/
-        public List<Product> GetProducts ()
+
+        public static List<Product> GetProducts ()
         {
-            return products;
+            try
+            {
+                using var context = new LucySalesDataContext();
+                return context.Products.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
-        public bool AddProduct (Product product)
+
+        public static bool AddProduct (Product product)
         {
-            Product p = products.FirstOrDefault(p=> p.ProductID == product.ProductID);
-
-            if (p == null) { 
-                return false;
+            try
+            {
+                using var context = new LucySalesDataContext();
+                context.Products.Add(product);
+                context.SaveChanges();
+                return true;
             }
-
-            products.Add(p);
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool RemoveProduct(int pId) {
-            Product p = products.FirstOrDefault(p => p.ProductID == pId);
-            if (p == null) {
+        public static bool RemoveProduct(int productId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var product = context.Products.Find(productId);
+
+                if (product != null)
+                {
+                    context.Products.Remove(product);
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-            products.Remove(p);
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public Product SearchProduct(int pId) { 
-            return products.FirstOrDefault(p => p.ProductID==pId);
+        public static Product SearchProduct(int productId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                return context.Products
+                    .Include(p => p.Category)
+                    .Include(p => p.OrderDetails)
+                    .FirstOrDefault(p => p.ProductId == productId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool UpdateProduct(Product product) {
-            Product p = products.FirstOrDefault(p => p.ProductID == product.ProductID);
+        public static bool UpdateProduct(Product product)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var existingProduct = context.Products.Find(product.ProductId);
 
-            if (p == null) {
+                if (existingProduct != null)
+                {
+                    existingProduct.ProductName = product.ProductName;
+                    existingProduct.SupplierId = product.SupplierId;
+                    existingProduct.CategoryId = product.CategoryId;
+                    existingProduct.QuantityPerUnit = product.QuantityPerUnit;
+                    existingProduct.UnitPrice = product.UnitPrice;
+                    existingProduct.UnitsInStock = product.UnitsInStock;
+                    existingProduct.UnitsOnOrder = product.UnitsOnOrder;
+                    existingProduct.ReorderLevel = product.ReorderLevel;
+                    existingProduct.Discontinued = product.Discontinued;
+
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            p.ProductID = product.ProductID;
-            p.ProductName = product.ProductName;
-            p.UnitPrice = product.UnitPrice;
-            p.QuantityPerUnit = product.QuantityPerUnit;
-            p.UnitsInStock = product.UnitsInStock;
-            p.CategoryID = product.CategoryID;
-            p.Discontinued = product.Discontinued;
-            p.ReorderLevel = product.ReorderLevel;
-            p.SupplierID = product.SupplierID;
-            p.UnitsOnOrder = product.UnitsOnOrder;
-
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

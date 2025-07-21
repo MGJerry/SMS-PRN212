@@ -12,7 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -59,11 +59,11 @@ namespace PhanLeHuyWpf
                 .Where(o => o.OrderDate >= fromDate && o.OrderDate <= toDate)
                 .Select(o => new
                 {
-                    o.OrderID,
-                    CustomerName = customers.FirstOrDefault(c => c.CustomerID == o.CustomerID)?.CompanyName ?? "Unknown",
+                    o.OrderId,
+                    CustomerName = customers.FirstOrDefault(c => c.CustomerId == o.CustomerId)?.CompanyName ?? "Unknown",
                     o.OrderDate,
                     TotalAmount = orderDetails
-                        .Where(d => d.OrderID == o.OrderID)
+                        .Where(d => d.OrderId == o.OrderId)
                         .Sum(d => (int) d.UnitPrice * d.Quantity * (1 - (decimal)d.Discount))
                 })
                 .OrderByDescending(r => r.TotalAmount)

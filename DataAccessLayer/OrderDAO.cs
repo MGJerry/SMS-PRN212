@@ -1,13 +1,15 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLayer;
 
 namespace DataLayer
 {
     public class OrderDAO
     {
-        static List<Order> orders = new List<Order>();
+        /*static List<Order> orders = new List<Order>();
         private bool isGenerated = false;
         public List<Order> GenerateSampleDataset()
         {
@@ -15,94 +17,141 @@ namespace DataLayer
 
             orders.Add(new Order()
             {
-                OrderID = 1,
-                CustomerID = 1,
-                EmployeeID = 1,
+                OrderId = 1,
+                CustomerId = 1,
+                EmployeeId = 1,
                 OrderDate = new DateTime(2024, 12, 10)
             });
 
             orders.Add(new Order()
             {
-                OrderID = 2,
-                CustomerID = 2,
-                EmployeeID = 2,
+                OrderId = 2,
+                CustomerId = 2,
+                EmployeeId = 2,
                 OrderDate = new DateTime(2024, 12, 15)
             });
 
             orders.Add(new Order()
             {
-                OrderID = 3,
-                CustomerID = 3,
-                EmployeeID = 3,
+                OrderId = 3,
+                CustomerId = 3,
+                EmployeeId = 3,
                 OrderDate = new DateTime(2025, 1, 5)
             });
 
             orders.Add(new Order()
             {
-                OrderID = 4,
-                CustomerID = 4,
-                EmployeeID = 4,
+                OrderId = 4,
+                CustomerId = 4,
+                EmployeeId = 4,
                 OrderDate = new DateTime(2025, 1, 20)
             });
 
             orders.Add(new Order()
             {
-                OrderID = 5,
-                CustomerID = 5,
-                EmployeeID = 5,
+                OrderId = 5,
+                CustomerId = 5,
+                EmployeeId = 5,
                 OrderDate = new DateTime(2025, 2, 14)
             });
             isGenerated = true;
             return orders;
-        }
+        }*/
+
         /*public List<Order> GetDataFromDatabase ()
         {
             return DatabaseContext.GetDbContext().Orders.ToList();
         }*/
-        public List<Order> GetOrders()
+
+        public static List<Order> GetOrders()
         {
-            return orders;
-        }
-        public bool AddOrder(Order order)
-        {
-            Order o = orders.FirstOrDefault(x => x.OrderID == order.OrderID);
-            if (o != null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                return context.Orders.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool AddOrder(Order order)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                context.Orders.Add(order);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool RemoveOrder(int orderId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var order = context.Orders.Find(orderId);
+
+                if (order != null)
+                {
+                    context.Orders.Remove(order);
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            orders.Add(order);
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool RemoveOrder(int orderId)
+        public static Order SearchOrder(int orderId)
         {
-            Order o = orders.FirstOrDefault(x => x.OrderID == orderId);
-            if (o == null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                return context.Orders
+                    .Include(o => o.Customer)
+                    .Include(o => o.Employee)
+                    .Include(o => o.OrderDetails)
+                    .ThenInclude(od => od.Product)
+                    .FirstOrDefault(o => o.OrderId == orderId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool UpdateOrder(Order order)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var existingOrder = context.Orders.Find(order.OrderId);
+
+                if (existingOrder != null)
+                {
+                    existingOrder.CustomerId = order.CustomerId;
+                    existingOrder.EmployeeId = order.EmployeeId;
+                    existingOrder.OrderDate = order.OrderDate;
+
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            orders.Remove(o);
-            return true;
-        }
-        public Order SearchOrder(int orderId)
-        {
-            return orders.FirstOrDefault(x => x.OrderID == orderId);
-        }
-        public bool UpdateOrder(Order order)
-        {
-            Order o = orders.FirstOrDefault(x => x.OrderID == order.OrderID);
-            if (o == null)
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception(ex.Message);
             }
-
-            o.CustomerID = order.CustomerID;
-            o.EmployeeID = order.EmployeeID;
-            o.OrderDate = order.OrderDate;
-
-            return true;
         }
     }
 }

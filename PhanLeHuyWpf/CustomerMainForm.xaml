@@ -7,12 +7,14 @@
         mc:Ignorable="d"
         Title="CustomerMainForm" Height="450" Width="800">
     <Grid>
+        <Label Content="PRN212 Assignment 02" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="41" Width="214" FontSize="20"/>
+        <Label Content="Building a Sales Order Management System using WPF, LINQ and EF" HorizontalAlignment="Center" Margin="0,68,0,0" VerticalAlignment="Top" Height="41" Width="660" FontSize="20" HorizontalContentAlignment="Center"/>
+        <Label Content="Sales Management System (SMS)" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="41" Width="308" FontSize="20"/>
         <Button x:Name="btnOrderProcessing" Content="Order Processing" HorizontalAlignment="Center" VerticalAlignment="Top" Height="43" Width="286" Margin="0,172,0,0" Click="btnOrderProcessing_Click"/>
         <Button x:Name="btnProfileEditing" Content="Profile Editing" HorizontalAlignment="Center" Margin="0,225,0,0" VerticalAlignment="Top" Height="42" Width="286" Click="btnProfileEditing_Click"/>
-        <Label Content="PRN212 Assignment 01" HorizontalAlignment="Center" Margin="0,30,0,0" VerticalAlignment="Top" Height="41" Width="214" FontSize="20"/>
-        <Label Content="Building a Sales Order Management System using WPF and LINQ" HorizontalAlignment="Left" Margin="119,68,0,0" VerticalAlignment="Top" Height="41" Width="588" FontSize="20"/>
-        <Label Content="Sales Management System (SMS)" HorizontalAlignment="Center" Margin="0,114,0,0" VerticalAlignment="Top" Height="41" Width="308" FontSize="20"/>
         <Button x:Name="btnExit" Content="Exit to Login Screen" HorizontalAlignment="Center" Margin="0,328,0,0" VerticalAlignment="Top" Height="42" Width="286" Click="btnExit_Click"/>
 
+        <!-- Nav stuff -->
+        <local:CustomerMenuControl x:Name="CustomerMenu" Grid.Column="0" VerticalAlignment="Top"/>
     </Grid>
 </Window>

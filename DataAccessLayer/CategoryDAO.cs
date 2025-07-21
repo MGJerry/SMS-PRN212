@@ -1,16 +1,18 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BusinessLayer;
 
 namespace DataLayer
 {
     public class CategoryDAO
     {
         
-        static List<Category> categories = new List<Category>();
+        /*static List<Category> categories = new List<Category>();
         private bool isGenerated = false;
         public List<Category> GenerateSampleDataset()
         {
@@ -21,94 +23,129 @@ namespace DataLayer
 
             categories.Add(new Category()
             {
-                CategoryID = 1,
+                CategoryId = 1,
                 CategoryName = "Peripherals",
                 Description = "Keyboards, mice, webcams, headsets"
             });
 
             categories.Add(new Category()
             {
-                CategoryID = 2,
+                CategoryId = 2,
                 CategoryName = "Storage Devices",
                 Description = "External hard drives, SSDs, flash drives"
             });
 
             categories.Add(new Category()
             {
-                CategoryID = 3,
+                CategoryId = 3,
                 CategoryName = "Displays",
                 Description = "Monitors, projectors, display accessories"
             });
 
             categories.Add(new Category()
             {
-                CategoryID = 4,
+                CategoryId = 4,
                 CategoryName = "Networking",
                 Description = "Routers, switches, Wi-Fi adapters"
             });
 
             categories.Add(new Category()
             {
-                CategoryID = 5,
+                CategoryId = 5,
                 CategoryName = "Computers",
                 Description = "Laptops, desktops, mini PCs"
             });
 
             isGenerated = true;
             return categories;
-        }
-
-        /*public List<Category> GetDataFromDatabase ()
-        {
-            return DatabaseContext.GetDbContext().Categories.ToList();
         }*/
 
-        public List<Category> GetCategories()
+        public static List<Category> GetCategories()
         {
-            return categories;
-        }
-
-        public bool AddCategory(Category category)
-        {
-            Category c = categories.FirstOrDefault(c => c.CategoryID == category.CategoryID);
-            if (c != null)
+            try
             {
-                return false; 
+                using var context = new LucySalesDataContext();
+                return context.Categories.ToList();
             }
-
-            categories.Add(category);
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool RemoveCategory(int categoryId)
+        public static bool AddCategory(Category category)
         {
-            Category c = categories.FirstOrDefault(c => c.CategoryID == categoryId);
-            if (c == null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                context.Categories.Add(category);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool RemoveCategory(int categoryId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var category = context.Categories.Find(categoryId);
+
+                if (category != null)
+                {
+                    context.Categories.Remove(category);
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            categories.Remove(c);
-            return true;
-        }
-
-        public Category SearchCategory(int categoryId)
-        {
-            return categories.FirstOrDefault(c => c.CategoryID == categoryId);
-        }
-
-        public bool UpdateCategory(Category category)
-        {
-            Category c = categories.FirstOrDefault(c => c.CategoryID == category.CategoryID);
-            if (c == null)
+            catch (Exception ex)
             {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static Category SearchCategory(int categoryId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                return context.Categories
+                    .Include(c => c.Products)
+                    .FirstOrDefault(c => c.CategoryId == categoryId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool UpdateCategory(Category category)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var existingCategory = context.Categories.Find(category.CategoryId);
+
+                if (existingCategory != null)
+                {
+                    existingCategory.CategoryName = category.CategoryName;
+                    existingCategory.Description = category.Description;
+                    existingCategory.Picture = category.Picture;
+
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            c.CategoryName = category.CategoryName;
-            c.Description = category.Description;
-
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

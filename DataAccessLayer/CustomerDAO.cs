@@ -1,13 +1,15 @@
-﻿using System;
+﻿using BusinessObjects;
+using DataAccessLayer;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLayer;
 
 namespace DataLayer
 {
     public class CustomerDAO
     {
-        static List<Customer> customers = new List<Customer>();
+        /*static List<Customer> customers = new List<Customer>();
         private bool isGenerated = false;
         public List<Customer> GenerateSampleDataset()
         {
@@ -18,7 +20,7 @@ namespace DataLayer
 
             customers.Add(new Customer()
             {
-                CustomerID = 1,
+                CustomerId = 1,
                 CompanyName = "TechGear Solutions",
                 ContactName = "Alice Nguyen",
                 ContactTitle = "CEO",
@@ -28,7 +30,7 @@ namespace DataLayer
 
             customers.Add(new Customer()
             {
-                CustomerID = 2,
+                CustomerId = 2,
                 CompanyName = "NextGen Electronics JSC",
                 ContactName = "Bob Tran",
                 ContactTitle = "Head of Procurement",
@@ -38,7 +40,7 @@ namespace DataLayer
 
             customers.Add(new Customer()
             {
-                CustomerID = 3,
+                CustomerId = 3,
                 CompanyName = "SmartTech Co., Ltd",
                 ContactName = "Charlie Le",
                 ContactTitle = "IT Coordinator",
@@ -48,7 +50,7 @@ namespace DataLayer
 
             customers.Add(new Customer()
             {
-                CustomerID = 4,
+                CustomerId = 4,
                 CompanyName = "FutureWare Inc.",
                 ContactName = "Diana Pham",
                 ContactTitle = "Deputy Director",
@@ -58,7 +60,7 @@ namespace DataLayer
 
             customers.Add(new Customer()
             {
-                CustomerID = 5,
+                CustomerId = 5,
                 CompanyName = "Innovatek Vietnam LLC",
                 ContactName = "Ethan Doan",
                 ContactTitle = "R&D Manager",
@@ -68,62 +70,101 @@ namespace DataLayer
 
             isGenerated = true;
             return customers;
-        }
+        }*/
 
         /*public List<Customer> GetDataFromDatabase ()
         {
             return DatabaseContext.GetDbContext().Customers.ToList();
         }*/
 
-        public List<Customer> GetCustomers()
+        public static List<Customer> GetCustomers()
         {
-            return customers;
+            try
+            {
+                using var context = new LucySalesDataContext();
+                return context.Customers.ToList();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool AddCustomer(Customer customer)
+        public static bool AddCustomer(Customer customer)
         {
-            Customer c = customers.FirstOrDefault(c => c.CustomerID == customer.CustomerID);
-            if (c != null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                context.Customers.Add(customer);
+                context.SaveChanges();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool RemoveCustomer(int customerId)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var customer = context.Customers.Find(customerId);
+
+                if (customer != null)
+                {
+                    context.Customers.Remove(customer);
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            customers.Add(customer);
-            return true;
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
 
-        public bool RemoveCustomer(int customerId)
+        public static Customer SearchCustomer(int customerId)
         {
-            Customer c = customers.FirstOrDefault(c => c.CustomerID == customerId);
-            if (c == null)
+            try
             {
+                using var context = new LucySalesDataContext();
+                return context.Customers
+                    .Include(c => c.Orders)
+                    .FirstOrDefault(c => c.CustomerId == customerId);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool UpdateCustomer(Customer customer)
+        {
+            try
+            {
+                using var context = new LucySalesDataContext();
+                var existingCustomer = context.Customers.Find(customer.CustomerId);
+
+                if (existingCustomer != null)
+                {
+                    existingCustomer.CompanyName = customer.CompanyName;
+                    existingCustomer.ContactName = customer.ContactName;
+                    existingCustomer.ContactTitle = customer.ContactTitle;
+                    existingCustomer.Address = customer.Address;
+                    existingCustomer.Phone = customer.Phone;
+
+                    context.SaveChanges();
+                    return true;
+                }
                 return false;
             }
-
-            customers.Remove(c);
-            return true;
-        }
-
-        public Customer SearchCustomer(int customerId)
-        {
-            return customers.FirstOrDefault(c => c.CustomerID == customerId);
-        }
-
-        public bool UpdateCustomer(Customer customer)
-        {
-            Customer c = customers.FirstOrDefault(c => c.CustomerID == customer.CustomerID);
-            if (c == null)
+            catch (Exception ex)
             {
-                return false;
+                throw new Exception(ex.Message);
             }
-
-            c.CompanyName = customer.CompanyName;
-            c.ContactName = customer.ContactName;
-            c.ContactTitle = customer.ContactTitle;
-            c.Address = customer.Address;
-            c.Phone = customer.Phone;
-
-            return true;
         }
     }
 }

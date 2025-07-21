@@ -12,7 +12,7 @@
         <StackPanel Orientation="Vertical" Margin="0,30,0,0">
             <StackPanel Orientation="Horizontal" Margin="0,5">
                 <Label Content="Ma khach hang:" Width="130"/>
-                <TextBox x:Name="txtCustomerID" Width="250" IsReadOnly="True"/>
+                <TextBox x:Name="txtCustomerId" Width="250" IsReadOnly="True"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Margin="0,5">

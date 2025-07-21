@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows;
-using BusinessLayer;
+using BusinessObjects;
 using Services;
 
 namespace PhanLeHuyWpf
@@ -16,10 +16,10 @@ namespace PhanLeHuyWpf
         {
             InitializeComponent();
 
-            txtProductID.Text = existingProduct.ProductID.ToString();
+            txtProductId.Text = existingProduct.ProductId.ToString();
             txtProductName.Text = existingProduct.ProductName;
-            txtSupplierID.Text = existingProduct.SupplierID.ToString();
-            txtCategoryID.Text = existingProduct.CategoryID.ToString();
+            txtSupplierId.Text = existingProduct.SupplierId.ToString();
+            txtCategoryId.Text = existingProduct.CategoryId.ToString();
             txtQuantityPerUnit.Text = existingProduct.QuantityPerUnit.ToString();
             txtUnitPrice.Text = existingProduct.UnitPrice.ToString();
             txtUnitsInStock.Text = existingProduct.UnitsInStock.ToString();
@@ -27,7 +27,7 @@ namespace PhanLeHuyWpf
             txtReorderLevel.Text = existingProduct.ReorderLevel.ToString();
             chkDiscontinued.IsChecked = existingProduct.Discontinued;
 
-            txtProductID.IsReadOnly = true;
+            txtProductId.IsReadOnly = true;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -37,21 +37,21 @@ namespace PhanLeHuyWpf
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (!iv.IsCategoryIDExist(int.Parse(txtCategoryID.Text)))
+            if (!iv.IsCategoryIdExist(int.Parse(txtCategoryId.Text)))
             {
-                MessageBox.Show("ID khong ton tai");
+                MessageBox.Show("Id khong ton tai");
                 return;
             }
             try
             {
                 Product product = new Product
                 {
-                    ProductID = int.Parse(txtProductID.Text),
+                    ProductId = int.Parse(txtProductId.Text),
                     ProductName = txtProductName.Text,
-                    SupplierID = int.Parse(txtSupplierID.Text),
-                    CategoryID = int.Parse(txtCategoryID.Text),
-                    QuantityPerUnit = int.Parse(txtQuantityPerUnit.Text),
-                    UnitPrice = double.Parse(txtUnitPrice.Text),
+                    SupplierId = int.Parse(txtSupplierId.Text),
+                    CategoryId = int.Parse(txtCategoryId.Text),
+                    QuantityPerUnit = txtQuantityPerUnit.Text.Trim(),
+                    UnitPrice = decimal.Parse(txtUnitPrice.Text),
                     UnitsInStock = int.Parse(txtUnitsInStock.Text),
                     UnitsOnOrder = int.Parse(txtUnitsOnOrder.Text),
                     ReorderLevel = int.Parse(txtReorderLevel.Text),

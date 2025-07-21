@@ -7,9 +7,9 @@
             <ListView x:Name="lvOrder" SelectionMode="Single" Margin="0" IsSynchronizedWithCurrentItem="True">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Order ID" DisplayMemberBinding="{Binding OrderID}" Width="80"/>
-                        <GridViewColumn Header="Customer ID" DisplayMemberBinding="{Binding CustomerID}" Width="100"/>
-                        <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding EmployeeID}" Width="100"/>
+                        <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding OrderId}" Width="80"/>
+                        <GridViewColumn Header="Customer Id" DisplayMemberBinding="{Binding CustomerId}" Width="100"/>
+                        <GridViewColumn Header="Employee Id" DisplayMemberBinding="{Binding EmployeeId}" Width="100"/>
                         <GridViewColumn Header="Order Date" DisplayMemberBinding="{Binding OrderDate}" Width="150"/>
                     </GridView>
                 </ListView.View>
@@ -23,8 +23,8 @@
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="354,160,0,240" HorizontalAlignment="Left">
-            <Label Content="Search Order ID:" VerticalAlignment="Center"/>
-            <TextBox x:Name="txtSearchOrderID" Width="120" Margin="5,0" Height="24"/>
+            <Label Content="Search Order Id:" VerticalAlignment="Center"/>
+            <TextBox x:Name="txtSearchOrderId" Width="120" Margin="5,0" Height="24"/>
             <Button x:Name="btnSearch" Content="Search" Width="80" Click="btnSearchOrder_Click" Height="24"/>
         </StackPanel>
         <Button x:Name="btnReport" Content="Reports" HorizontalAlignment="Left" Margin="10,282,0,0" VerticalAlignment="Top" Height="42" Width="99" Click="btnReport_Click"/>

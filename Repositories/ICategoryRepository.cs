@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using BusinessLayer;
+using BusinessObjects;
 
 namespace Repositories
 {

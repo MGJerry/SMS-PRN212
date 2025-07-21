@@ -11,16 +11,16 @@
 
         <StackPanel Orientation="Vertical" Grid.Row="0" Margin="0,0,0,10">
             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                <Label Content="Order ID:" Width="100" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtOrderID" Width="200"/>
+                <Label Content="Order Id:" Width="100" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtOrderId" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                <Label Content="Customer ID:" Width="100" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtCustomerID" Width="200"/>
+                <Label Content="Customer Id:" Width="100" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtCustomerId" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,0,0,5">
-                <Label Content="Employee ID:" Width="100" VerticalAlignment="Center"/>
-                <TextBox x:Name="txtEmployeeID" Width="200"/>
+                <Label Content="Employee Id:" Width="100" VerticalAlignment="Center"/>
+                <TextBox x:Name="txtEmployeeId" Width="200"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
                 <Label Content="Order Date:" Width="100" VerticalAlignment="Center"/>
